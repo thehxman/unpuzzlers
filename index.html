@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combined Layout</title>
+  <style>
+ /* CSS Variables for Reusability */
+    :root {
+  --primary-color: #0000ff; /* Blue */
+  --secondary-color: #FFD700; /* Gold */
+  --text-color: #000000; /* Black */
+  --background-color: #FFFFFF; /* White */
+}
+
+  /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+   
+      height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .logo img {
+      height: 50px;
+      margin-left: 50px;
+    }
+
+.menu {
+  position: relative;
+  margin-right: 50px;
+}
+
+.menu-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.menu-button:hover {
+  color: var(--primary-color);
+}
+
+.menu:hover .dropdown,
+.dropdown:hover {
+  display: block; /* Keep the dropdown visible when hovering on it */
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; /* Ensure it aligns perfectly below the button */
+  right: 0;
+  background: #ffffff; /* Light gray background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 600px; /* Control the width of the dropdown */
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 1001;
+}
+
+.dropdown a {
+  display: block;
+  padding: 15px; /* Adjust spacing for larger clickable area */
+  text-decoration: none;
+  color: #000000; /* Dark gray text color */
+  font-size: 18px; /* Slightly larger text */
+  font-weight: bold; /* Bold text for emphasis */
+  line-height: 1.5;
+  border-bottom: 1px solid #ddd; /* Divider between items */
+}
+
+.dropdown a:hover {
+  background: #3366FF; /* Darker gray on hover */
+  color: white; /* White text on hover for contrast */
+}
+
+.menu:hover .dropdown {
+  display: block; /* Show dropdown on hover */
+}
+
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5%;
+      margin-top: 0px; /* Offset for the fixed top bar */
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 120%;
+      height: 120%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .hero-bg.active {
+      animation: zoomInOut 4s ease-in-out;
+      opacity: 1;
+    }
+
+.hero-text {
+  position: absolute; /* Ensure it can be positioned relative to the hero-section */
+  top: 35%; /* Adjust to 20% above the middle (50% - 20%) */
+  transform: translateY(0%);
+  z-index: 10;
+  color: #ffffff;
+  font-size: 3rem;
+  text-align: left;
+  background: rgba(0, 0, 0, 0);
+  padding: 10px 20px;
+  border-radius: 10px;
+  animation: fadeInText 1s ease-in-out;
+  margin-left: 200px;
+  max-width: 500px;
+}
+
+
+    .hero-title {
+      font-size: 3.4rem;
+      margin-bottom: 60px;
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    .additional-button {
+  position: absolute; /* Set to absolute so it doesn't move with the hero-text */
+  bottom: 40%; /* Adjust this to place the button where you want it */
+  right: 250px; /* Keeps the spacing consistent */
+  background: #0000ff;
+  color: #fff;
+  padding: 15px 50px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.additional-button:hover {
+      background: #00008B;
+    }
+
+    @keyframes zoomInOut {
+      0% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0%);
+      }
+    }
+
+    /* Our Story Section */
+    .story-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+      width: 100%;
+      padding: 0 10%;
+    }
+
+    .story-image-container {
+      flex: 1;
+      max-width: 50%;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .story-image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .story-image-container:hover .story-image {
+      transform: scale(1.2);
+    }
+
+    .story-content {
+      flex: 1;
+      max-width: 50%;
+      padding-left: 50px;
+    }
+
+    .story-title {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .story-description {
+      font-size: 1.25rem;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .story-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .story-image-container,
+      .story-content {
+        max-width: 100%;
+      }
+
+      .story-content {
+        padding-left: 0;
+        margin-top: 20px;
+      }
+    }
+
+     /* Our services Section */
+   /* services Background */
+.services-background {
+  background: #cccccc; /* Grey background */
+  width: 100vw; /* Full width of the viewport */
+  margin-left: calc(-50vw + 50%); /* Center align full-width background */
+  padding: 200px 0; /* 200px above and below */
+}
+
+.services-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+
+.services-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: left;
+  position: relative;
+  z-index: 1; /* Make sure it stays above the grey background */
+}
+
+
+    .services-item {
+      padding: 20px 0;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+
+    .services-item:hover {
+      background: #f0f0f0;
+    }
+
+    .services-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .toggle-icon {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #555;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-icon.rotate {
+      transform: rotate(45deg);
+    }
+
+    .services-content {
+      display: none;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-bottom: 1px solid #ddd;
+      justify-content: space-between;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .services-content.visible {
+      display: flex;
+    }
+
+    .services-details {
+      flex: 1;
+      max-width: 50%;
+      margin-right: 20px;
+    }
+
+    .services-details-title {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .services-details-description {
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .services-image-container {
+      flex: 1;
+      max-width: 50%;
+      overflow: hidden;
+    }
+
+    .services-image {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .services-image-container:hover .services-image {
+      transform: scale(1.2);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+   .contact-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100%;
+  padding: 0 10%;
+  background: #333; /* Black background */
+  color: #fff; /* White text */
+}
+
+.contact-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff; /* White text */
+  line-height: 1;
+}
+
+.contact-info {
+  max-width: 50%;
+  text-align: left;
+}
+
+.contact-description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+.contact-form {
+  max-width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid #555; /* Underline effect */
+  background: transparent; /* Transparent background */
+  color: #fff;
+  outline: none;
+  transition: border-bottom 0.3s ease-in-out;
+}
+
+.contact-input::placeholder {
+  color: #aaa; /* Light gray placeholder text */
+}
+
+.contact-input:focus {
+  border-bottom: 2px solid var(--primary-color); /* Green border on focus */
+}
+
+.contact-button {
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff; /* Border around the button */
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-button:hover {
+  background: var(--primary-color); /* Green background */
+  color: #000;
+  border-color: var(--primary-color); /* Green border */
+}
+
+.contact-form textarea {
+  resize: none; /* Disable textarea resizing */
+}
+
+.contact-section .contact-info h2 span {
+  font-size: 1.2em;
+  color: var(--primary-color); /* Highlight "Us" */
+}
+ /* Fade in effect */
+.fade-in {
+  opacity: 0; /* Hidden initially */
+  transform: translateY(70px); /* Slightly moved down */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Smooth fade-in effect */
+}
+
+.fade-in.show {
+  opacity: 1; /* Fully visible */
+  transform: translateY(0); /* Moved to its original position */
+}
+
+ /* footer */
+.footer {
+  background-color: #333; /* Dark background */
+  color: #fff; /* White text */
+  text-align: center;
+  padding: 20px 10px;
+  position: relative;
+}
+
+.footer-line {
+  border: 0;
+  height: 1px;
+  background: #666; /* Gray color for the line */
+  margin: 0 auto 10px;
+  width: 90%;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: #fff;
+}
+
+.footer-link {
+  color: #ffffff; /* Gold color for the link */
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #0000ff; /* Blue hover effect */
+  text-decoration: underline;
+}
+
+/*media*/
+@media (max-width: 768px) {
+  .dropdown {
+    width: 100%; /* Make the dropdown menu take the full width */
+  }
+
+  .hero-text {
+    margin-left: 20px; /* Reduce margin */
+    font-size: 1.5rem; /* Adjust font size for smaller screens */
+    max-width: 90%; /* Adjust text container size */
+  }
+
+  .additional-button {
+    right: 20px; /* Adjust button positioning */
+    font-size: 1rem; /* Smaller button size */
+    padding: 10px 30px;
+  }
+
+  .story-section {
+    flex-direction: column; /* Stack elements vertically */
+    text-align: center; /* Center align text */
+  }
+
+  .story-image-container,
+  .story-content {
+    max-width: 100%; /* Full width for content and image */
+  }
+
+  .services-section {
+    padding: 20px; /* Reduce padding for smaller screens */
+  }
+
+  .contact-section {
+    flex-direction: column; /* Stack contact form and info */
+    text-align: center; /* Center align content */
+    gap: 20px;
+  }
+
+  .contact-form,
+  .contact-info {
+    max-width: 100%; /* Full width for form and text */
+    margin: 0 auto; /* Center align content */
+  }
+
+  .contact-title {
+    font-size: 2rem; /* Adjust font size */
+  }
+
+  .menu-button {
+    font-size: 20px; /* Adjust menu button size */
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="logo">
+      <img src="your-logo.png" alt="Logo">
+    </div>
+    <div class="menu">
+      <button class="menu-button">☰</button>
+      <div class="dropdown">
+         <a href="#hero">Home</a>
+      <a href="#our-story">Our Story</a>
+      <a href="#our-services">Our Services</a>
+      <a href="#contact-us">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div id="hero"class="hero-section">
+    <div class="hero-text">
+      <div class="hero-title" id="hero-title">AI Made Simple</div>
+
+      <div class="hero-description" id="hero-description">
+    We simplify AI’s complexities, providing clear, actionable strategies that empower your leadership and teams to make confident decisions. From understanding what AI can do for you to knowing how to implement it effectively, we’ll illuminate the path forward.
+      </div>
+    </div>
+    <a href="#contact-us" class="additional-button">Contact Us</a>
+    <div class="hero-bg" style="background-image: url('./clarity.png');"></div>
+    <div class="hero-bg" style="background-image: url('./precision.png');"></div>
+    <div class="hero-bg" style="background-image: url('./impact.png');"></div>
+  </div>
+
+  <!-- Our Story Section -->
+<div id="our-story" class="story-section fade-in">
+  <div class="story-section">
+    <div class="story-image-container">
+      <img src="our-story.png" alt="Our Story Image" class="story-image">
+    </div>
+    <div class="story-content">
+      <h2 class="story-title">Our </span><span style="color: var(--primary-color);">Story</h2>
+      <p class="story-description">
+        At Unpuzzlers, we bring together multi-industry services and cutting-edge AI techniques to solve complex challenges with creativity and precision. Our unique approach allows us to view problems from diverse perspectives, crafting solutions that deliver tangible results for high-impact industries.
+      </p>
+    </div>
+  </div>
+</div>
+ 
+
+<!-- Our Services Section -->
+<div id="our-services" class="services-section fade-in">
+  <div class="services-background">
+    <div class="services-section">
+      <h2 class="services-title">Our </span><span style="color: var(--primary-color);">Services</h2>
+
+      <!-- Service 1: Strategic AI Guidance -->
+      <div class="services-item" onclick="toggleContent(0)">
+        <span class="services-name">Strategic AI Guidance</span>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="services-content" id="content-0">
+        <div class="services-details">
+          <p class="services-details-description">
+            We provide actionable insights and strategic frameworks to help businesses leverage AI effectively. From identifying opportunities to implementing solutions, we ensure AI drives meaningful impact and aligns with your long-term vision.
+          </p>
+        </div>
+        <div class="services-image-container">
+          <img src="architecture.png" alt="Strategic AI Guidance Image" class="services-image">
+        </div>
+      </div>
+
+      <!-- Service 2: Predictive Analytics and Forecasting -->
+      <div class="services-item" onclick="toggleContent(1)">
+        <span class="services-name">Predictive Analytics and Forecasting</span>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="services-content" id="content-1">
+        <div class="services-details">
+          <p class="services-details-description">
+            Harness the power of AI to predict trends, optimize operations, and stay ahead of the competition. From demand forecasting to customer behavior analysis, our solutions provide actionable insights that enable smarter, data-driven decisions.
+          </p>
+        </div>
+        <div class="services-image-container">
+          <img src="code.png" alt="Predictive Analytics Image" class="services-image">
+        </div>
+      </div>
+
+      <!-- Service 3: AI-Powered Automation -->
+      <div class="services-item" onclick="toggleContent(2)">
+        <span class="services-name">AI-Powered Automation</span>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="services-content" id="content-2">
+        <div class="services-details">
+          <p class="services-details-description">
+            Streamline processes and enhance productivity with AI-driven automation. From intelligent workflows to smart devices, our solutions save time and resources while maintaining precision and efficiency.
+          </p>
+        </div>
+        <div class="services-image-container">
+          <img src="guidance.png" alt="AI-Powered Automation Image" class="services-image">
+        </div>
+      </div>
+
+      <!-- Service 4: Robotics and Smart Devices -->
+      <div class="services-item" onclick="toggleContent(3)">
+        <span class="services-name">Robotics and Smart Devices</span>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="services-content" id="content-3">
+        <div class="services-details">
+          <p class="services-details-description">
+            Revolutionize operations with robotics and smart devices. From autonomous assistants to smart systems, we deliver technology that enhances performance and drives innovation in your business.
+          </p>
+        </div>
+        <div class="services-image-container">
+          <img src="robot.png" alt="Robotics and Smart Devices Image" class="services-image">
+        </div>
+      </div>
+
+      <!-- Service 5: Storz.ai Integration -->
+      <div class="services-item" onclick="toggleContent(4)">
+        <span class="services-name">Software as a Service</span>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="services-content" id="content-4">
+        <div class="services-details">
+          <h3 class="services-details-title">Storz Assistant for Retail</h3>
+          <p class="services-details-description">
+            Storz is an AI-powered platform designed to enhance in-store customer experiences by offering personalized shopping assistance. With features like intelligent recommendations, cross-selling, and detailed analytics, Storz.ai empowers retailers to boost sales, improve engagement, and reduce operational costs.
+          </p>
+          <button onclick="window.open('https://www.storz.ai', '_blank')" 
+            style="background-color: #0000ff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; font-size: 1rem; margin-top: 10px;">
+            Learn More
+          </button>
+        </div>
+        <div class="services-image-container">
+          <img src="storz.png" alt="Storz.ai Integration Image" class="services-image">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+ <!-- Contact Us Section -->
+<div id="contact-us" class="contact-section fade-in">
+  <div class="contact-section" style="display: flex; justify-content: space-between;">
+    <form class="contact-form">
+      <input type="text" class="contact-input" placeholder="Your Name" required>
+      <input type="email" class="contact-input" placeholder="Your Email" required>
+      <textarea class="contact-input" placeholder="Your Inquiry" rows="5" required></textarea>
+      <button type="submit" class="contact-button">Get in Touch</button>
+    </form>
+    <div class="contact-info">
+      <h2 class="contact-title">Contact <span style="color: var(--primary-color);">Us</span></h2>
+      <p class="contact-description">
+        It is very important for us to keep in touch with you, so we are always ready to answer any question that interests you. Shoot!
+      </p>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <hr class="footer-line">
+  <p class="footer-text">© 2025 Unpuzzlers Corp </p>
+</footer>
+
+
+
+  <script>
+    const backgrounds = document.querySelectorAll('.hero-bg');
+    const heroTitle = document.getElementById('hero-title');
+    const heroDescription = document.getElementById('hero-description');
+    const textData = [
+      {
+        title: "AI made simple",
+        description: "We simplify AI’s complexities, providing clear, actionable strategies that empower your leadership and teams to make confident decisions. From understanding what AI can do for you to knowing how to implement it effectively, we’ll illuminate the path forward.",
+      },
+      {
+        title: "The Right Solution, Every Time.",
+        description: "AI isn’t a one-size-fits-all tool. We craft solutions tailored specifically to your business, your challenges, and your vision. It’s not about adding more tech—it’s about creating something that fits perfectly.",
+      },
+      {
+        title: "Impact",
+        description: "AI is only as powerful as the outcomes it delivers. We focus on creating measurable, meaningful change—whether that’s streamlining operations, driving growth, or reimagining customer experiences.",
+      },
+    ];
+
+    let currentIndex = 0;
+
+    function changeSlide() {
+        // Remove active class from current background
+        backgrounds[currentIndex].classList.remove('active');
+        
+        // Update current index
+        currentIndex = (currentIndex + 1) % backgrounds.length;
+        
+        // Update the text with consistent formatting
+        heroTitle.textContent = textData[currentIndex].title;
+        heroDescription.textContent = textData[currentIndex].description;
+
+        // Add active class to the new background
+        backgrounds[currentIndex].classList.add('active');
+    }
+
+    backgrounds[0].classList.add('active');
+    setInterval(changeSlide, 9900);
+
+    function toggleContent(index) {
+        const content = document.getElementById(`content-${index}`);
+        const icon = content.previousElementSibling.querySelector('.toggle-icon');
+
+        document.querySelectorAll('.services-content').forEach((c, i) => {
+            if (i !== index) {
+                c.classList.remove('visible');
+                c.previousElementSibling.querySelector('.toggle-icon').classList.remove('rotate');
+            }
+        });
+
+        if (content.classList.contains('visible')) {
+            content.classList.remove('visible');
+            icon.classList.remove('rotate');
+        } else {
+            content.classList.add('visible');
+            icon.classList.add('rotate');
+        }
+    }
+
+    // Scroll Fade-In Effect
+    document.addEventListener("DOMContentLoaded", () => {
+        const fadeElements = document.querySelectorAll(".fade-in");
+
+        const observer = new IntersectionObserver(
+            (entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            },
+            {
+                threshold: 0.43, // Trigger when 43% of the element is visible
+            }
+        );
+
+        fadeElements.forEach((el) => observer.observe(el));
+    });
+</script>
+
+</body>
+</html>
