@@ -245,6 +245,26 @@
     }
 
     @media (max-width: 768px) {
+/*hero*/
+.hero-text {
+    text-align: center; /* Center the text */
+    margin: 0 auto; /* Align it in the center */
+    max-width: 90%; /* Adjust width for small screens */
+  }
+
+  .additional-button {
+    position: static; /* Remove absolute positioning */
+    display: block; /* Ensure it's a block element */
+    margin: 20px auto 0; /* Center horizontally and add some spacing */
+    text-align: center; /* Align the text within the button */
+  }
+
+  .hero-section {
+    align-items: center; /* Center everything vertically */
+    justify-content: center; /* Center everything horizontally */
+    flex-direction: column; /* Stack text and button vertically */
+  }
+/*story*/
       .story-section {
         flex-direction: column;
         text-align: center;
@@ -260,6 +280,8 @@
         padding-left: 0;
         margin-top: 20px;
       }
+
+
     }
 
      /* Our services Section */
