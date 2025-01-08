@@ -244,47 +244,7 @@
       line-height: 1.8;
     }
 
-    @media (max-width: 768px) {
-/*hero*/
-.hero-text {
-    text-align: center; /* Center the text */
-    margin: 0 auto; /* Align it in the center */
-    max-width: 90%; /* Adjust width for small screens */
-  }
-
-  .additional-button {
-    position: static; /* Remove absolute positioning */
-    display: block; /* Ensure it's a block element */
-    margin: 20px auto 0; /* Center horizontally and add some spacing */
-    text-align: center; /* Align the text within the button */
-  }
-
-  .hero-section {
-    align-items: center; /* Center everything vertically */
-    justify-content: center; /* Center everything horizontally */
-    flex-direction: column; /* Stack text and button vertically */
-  }
-/*story*/
-      .story-section {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-      }
-
-      .story-image-container,
-      .story-content {
-        max-width: 100%;
-      }
-
-      .story-content {
-        padding-left: 0;
-        margin-top: 20px;
-      }
-
-
-    }
-
-     /* Our services Section */
+        /* Our services Section */
    /* services Background */
 .services-background {
   background: #cccccc; /* Grey background */
@@ -528,18 +488,27 @@
     width: 100%; /* Make the dropdown menu take the full width */
   }
 
-  .hero-text {
-    margin-left: 20px; /* Reduce margin */
-    font-size: 1.5rem; /* Adjust font size for smaller screens */
-    max-width: 90%; /* Adjust text container size */
+ .hero-text {
+    text-align: center; /* Center the hero text */
+    margin: 0 auto; /* Center horizontally */
+    max-width: 90%; /* Adjust for smaller screens */
   }
 
   .additional-button {
-    right: 20px; /* Adjust button positioning */
-    font-size: 1rem; /* Smaller button size */
-    padding: 10px 30px;
+    position: static; /* Remove absolute positioning */
+    display: block; /* Ensure it behaves as a block-level element */
+    margin: 20px auto 0; /* Add top spacing and center horizontally */
+    text-align: center; /* Center the button content */
   }
 
+  .hero-section {
+    display: flex; /* Enable flexbox for alignment */
+    flex-direction: column; /* Stack text and button vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    text-align: center; /* Align all content to the center */
+  }
+}
   .story-section {
     flex-direction: column; /* Stack elements vertically */
     text-align: center; /* Center align text */
